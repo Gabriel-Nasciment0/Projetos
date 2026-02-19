@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: #1e1e1e;
+    color: #fff;
+}
+
+.app {
+    padding: 2rem;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.column {
+    background: #2a2a2a;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.card {
+    background: #1a1a1a;
+    padding: 0.75rem;
+    border-radius: 6px;
+    margin-top: 0.5rem;
+}
