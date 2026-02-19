@@ -1,16 +1,33 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Column from "./Column.jsx"
 import TaskForm from "./TaskForm.jsx"
 
 export default function Board() {
-    const [tasks, setTasks] = useState([
-        { id: 1, title: "Estudar react", status: "todo" },
-        { id: 2, title: "Criar projeto", status: "doing" },
-        { id: 3, title: "Descansar", status: "done" },
-    ])
+    const [tasks, setTasks] = useState(() => {
+        const stored = localStorage.getItem("trello-clone-tasks")
+        return stored ? JSON.parse(stored) : []
+    })
+
+    useEffect(() => {
+        if (tasks.length === 0) return
+
+        localStorage.setItem("trello-clone-tasks", JSON.stringify(tasks))
+    }, [tasks])
 
     function addTask(newTask) {
         setTasks((prev) => [...prev, newTask])
+    }
+
+    function changeTaskStatus(id, newStatus) {
+        setTasks((prev) =>
+            prev.map((tasks) =>
+                tasks.id === id ? { ...tasks, status: newStatus } : tasks,
+            ),
+        )
+    }
+
+    function removeTask(id) {
+        setTasks((current) => current.filter((tasks) => tasks.id !== id))
     }
 
     return (
@@ -22,16 +39,22 @@ export default function Board() {
                     title="A fazer"
                     status="todo"
                     tasks={tasks}
+                    onChangeStatus={changeTaskStatus}
+                    onRemove={removeTask}
                 />
                 <Column
                     title="Em progresso"
                     status="doing"
                     tasks={tasks}
+                    onChangeStatus={changeTaskStatus}
+                    onRemove={removeTask}
                 />
                 <Column
                     title="Concluido"
                     status="done"
                     tasks={tasks}
+                    onChangeStatus={changeTaskStatus}
+                    onRemove={removeTask}
                 />
             </div>
         </>

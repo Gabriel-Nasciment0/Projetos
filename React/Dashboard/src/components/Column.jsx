@@ -1,18 +1,24 @@
-import Card from "./Card.jsx"
-export default function Column({ title, status, tasks }) {
-    const filteredTasks = tasks.filter((tasks) => tasks.status === status)
+import Task from "./Task.jsx"
+export default function Column({
+    title,
+    status,
+    tasks,
+    onChangeStatus,
+    onRemove,
+}) {
+    const filteredTasks = tasks.filter((task) => task.status === status)
     return (
         <div className="column">
             <h2>{title}</h2>
 
-            <div className="cards">
-                {filteredTasks.map((tasks) => (
-                    <Card
-                        key={tasks.id}
-                        title={tasks.title}
-                    />
-                ))}
-            </div>
+            {filteredTasks.map((task) => (
+                <Task
+                    key={task.id}
+                    task={task}
+                    onChangeStatus={onChangeStatus}
+                    onRemove={onRemove}
+                />
+            ))}
         </div>
     )
 }
