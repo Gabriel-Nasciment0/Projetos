@@ -1,0 +1,11 @@
+.column {
+    background: $column-bg;
+    padding: 15px;
+    width: 280px;
+    border-radius: $radius;
+
+    h2 {
+        margin-bottom: 15px;
+        font-size: 18px;
+    }
+}

@@ -20,8 +20,8 @@ export default function Board() {
 
     function changeTaskStatus(id, newStatus) {
         setTasks((prev) =>
-            prev.map((tasks) =>
-                tasks.id === id ? { ...tasks, status: newStatus } : tasks,
+            prev.map((task) =>
+                task.id === id ? { ...task, status: newStatus } : task,
             ),
         )
     }
