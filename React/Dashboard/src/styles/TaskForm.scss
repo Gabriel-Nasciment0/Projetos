@@ -24,3 +24,16 @@
         }
     }
 }
+
+@media (max-width: 768px) {
+    .task-form {
+        flex-direction: column;
+        padding: 15px;
+
+        input,
+        select,
+        button {
+            width: 100%;
+        }
+    }
+}
